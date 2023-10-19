@@ -8,7 +8,10 @@ from .forms import RegisterUserForm
 def register_user(request):
     if request.method == 'POST':
         form = RegisterUserForm(request.POST)
+        for field in form:
+            print(field.name, field.errors)
         if form.is_valid():
+            print("Sardor")
             form.save()
             messages.success(request, 'Registration Successful.')
             return redirect('login')
@@ -19,6 +22,7 @@ def register_user(request):
 
 def login_user(request):
     return render(request, 'users/login.html')
+
 
 def panel(request):
     return render(request, 'users/panel.html')
